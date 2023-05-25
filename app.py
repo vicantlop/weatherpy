@@ -29,13 +29,13 @@ class Weather:
 
         data = response.json()
 
-        formatted = json.dumps(data,indent=2)
+        formatted_data = json.dumps(data,indent=2)
 
-        o = json.loads(formatted)
+        weatherObject = json.loads(formatted_data)
 
-        location = o["location"]
-        current = o["current"]
-        forecast = o["forecast"]['forecastday']
+        location = weatherObject["location"]
+        current = weatherObject["current"]
+        forecast = weatherObject["forecast"]['forecastday']
 
 
         print(f'It is currently {current["temp_f"]} degrees fahrenheit and {current["condition"]["text"]} in {location["name"]}, {location["country"]}')
