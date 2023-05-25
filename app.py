@@ -1,6 +1,11 @@
 import requests
 import calendar
 import json
+from dotenv import load_dotenv
+import os
+
+def configure():
+    load_dotenv()
 
 print("type name of city and hit enter to get a 3 day forecast:")
 city = input()
@@ -10,12 +15,13 @@ class Weather:
         self.city = city
     
     def forecast(self):
+        configure()
         url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
 
         querystring = {"q":f"{self.city}","days":"3"}
 
         headers = {
-            "X-RapidAPI-Key": "187b0ec4b7msh9909e74c3e40f95p17b4b6jsn67ee1ffae374",
+            "X-RapidAPI-Key": os.getenv('apikey'),
             "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
         }
 
