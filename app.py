@@ -1,5 +1,6 @@
 import requests
 import calendar
+from datetime import datetime
 import json
 from dotenv import load_dotenv
 import os
@@ -7,18 +8,16 @@ import os
 def configure():
     load_dotenv()
 
-print("type name of city and hit enter to get a 3 day forecast:")
-city = input()
-
 class Weather:
-    def __init__(self, city):
+    def __init__(self, city, days):
         self.city = city
+        self.days = days
     
     def forecast(self):
         configure()
         url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
 
-        querystring = {"q":f"{self.city}","days":"3"}
+        querystring = {"q":f"{self.city}","days":f"{self.days}"}
 
         headers = {
             "X-RapidAPI-Key": os.getenv('apikey'),
@@ -40,15 +39,26 @@ class Weather:
 
         print(f'It is currently {current["temp_f"]} degrees fahrenheit and {current["condition"]["text"]} in {location["name"]}, {location["country"]}')
 
-        count = 0
+        dt = datetime.now()
+        count = dt.weekday()
 
         for days in forecast:
             count += 1
+            if count > 6:
+                count -= 7
             day = days["day"]
             print(f'{calendar.day_name[count]} will have a high of {day["maxtemp_f"]}, and a low of {day["mintemp_f"]}, and will be {day["condition"]["text"]}')
 
-threeday = Weather(city)
-threeday.forecast()
+def main():
+    print("type name of city and hit enter:")
+    city = input()
+    print("Now please enter the number of days you would like a forecast for (please keep to 3 and under):")
+    days = input()
+    userI = Weather(city, days)
+    userI.forecast()
+
+if __name__ == "__main__":
+    main()
 
 
 # location.name, .region, .country, .localtime
