@@ -65,3 +65,4 @@ if __name__ == "__main__":
 # current.temp_f, .condition.text
 # forecast.forecastday[0], forecast.forecastday[0].maxtemp_f, forecast.forecastday[0].mintemp_f
 # forecast.forecastday[1], forecast.forecastday[1].maxtemp_f, forecast.forecastday[1].mintemp_f, forecast.forecastday[1].condition.text
+#changes
