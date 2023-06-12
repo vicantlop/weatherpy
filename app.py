@@ -54,7 +54,6 @@ def main():
     city = input()
     print("Now please enter the number of days you would like a forecast for (please keep to 3 and under):")
     days = input()
-    print(int(days))
     while int(days) > 3:
         print("Please enter a value of 3 or less:")
         days = input()
